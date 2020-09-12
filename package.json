@@ -12,8 +12,14 @@
     "lint": "yarn lint:js && yarn lint:style"
   },
   "lint-staged": {
-    "*.{js,vue}": "eslint",
-    "*.{css,vue}": "stylelint"
+    "*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,vue}": [
+      "stylelint --fix",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
