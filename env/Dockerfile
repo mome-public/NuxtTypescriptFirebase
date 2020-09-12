@@ -17,10 +17,16 @@ RUN curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
 ENV PATH $HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 
 RUN yarn global add typesync
+RUN yarn global add firebase-tools
 RUN apt-get update && apt-get install -y default-jdk --fix-missing
 
 ENV HOST 0.0.0.0
 EXPOSE 3000
 EXPOSE 6006
+EXPOSE 5000
+EXPOSE 5001
+EXPOSE 8080
+EXPOSE 8085
+EXPOSE 9005
 
 CMD ["/bin/bash"]

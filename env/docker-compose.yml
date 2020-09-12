@@ -1,12 +1,17 @@
 version: '3'
 services:
   nuxt-typescript-firebase:
-    build: 
+    build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - 3000:3000
       - 6006:6006
+      - 5000:5000
+      - 5001:5001
+      - 8080:8080
+      - 8085:8085
+      - 9005:9005
     volumes:
       - ../:/app/NuxtTypescriptFirebase
     stdin_open: true
