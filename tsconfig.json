@@ -15,6 +15,7 @@
     "noEmit": true,
     "experimentalDecorators": true,
     "baseUrl": "src",
+    "incremental": true,
     "paths": {
       "~/*": [
         "./src/*"
