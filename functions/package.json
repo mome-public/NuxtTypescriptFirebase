@@ -3,6 +3,10 @@
   "scripts": {
     "lint": "eslint 'src/**/*.{js,ts}'",
     "build": "npm run lint && tsc",
+    "dbreset": "firebase firestore:delete --all-collections",
+    "dbreset:users": "firebase firestore:delete -y --shallow users",
+    "dbseed": "npm run dbseed:users",
+    "dbseed:users": "node lib/commands/dbseed.js users seeds/users.tsv",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
