@@ -23,7 +23,8 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+export default defineComponent({
   props: {
     title: {
       type: String,
@@ -34,5 +35,5 @@ export default {
       required: true,
     },
   },
-}
+})
 </script>
