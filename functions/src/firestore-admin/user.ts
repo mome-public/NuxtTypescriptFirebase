@@ -1,7 +1,7 @@
 /* eslint-disable no-loop-func */
 import admin from 'firebase-admin';
 
-import { collectionName } from '../services/nuxt-typescript-firebase/constants';
+import { COLLECTION_NAMES } from '../services/nuxt-typescript-firebase/invariables';
 import { User } from '../services/nuxt-typescript-firebase/models/user';
 
 export const findPublisher = async (
@@ -9,7 +9,7 @@ export const findPublisher = async (
   id: string,
 ) => {
   const doc = await db
-    .collection(collectionName.users)
+    .collection(COLLECTION_NAMES.USERS)
     .doc(id)
     .get();
   const user = doc.data() as User;
