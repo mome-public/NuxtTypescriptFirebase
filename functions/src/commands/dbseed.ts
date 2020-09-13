@@ -4,7 +4,7 @@ import fs from 'fs';
 import parse from 'csv-parse/lib/sync';
 
 import { User } from '../services/nuxt-typescript-firebase/models/user';
-import { collectionName } from '../services/nuxt-typescript-firebase/constants';
+import { COLLECTION_NAMES } from '../services/nuxt-typescript-firebase/invariables';
 import { addCounter } from '../firestore-admin/record-counter';
 
 import serviceAccount from '../nuxt-typescript-firebase-firebase-adminsdk.json';
@@ -25,7 +25,7 @@ const uploadSeed = async (collection: string, seedFile: string) => {
   const ref = db.collection(collection);
 
   switch (collection) {
-    case collectionName.users: {
+    case COLLECTION_NAMES.USERS: {
       const docs =
         records.map((record: User) => ({
           ...record,
