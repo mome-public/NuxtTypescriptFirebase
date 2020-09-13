@@ -38,22 +38,39 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      items: [
-        {
-          title: 'Home',
-          icon: 'home',
-          to: { name: 'index' },
-        },
-        {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' },
-        },
-      ],
-    }
+import { defineComponent, reactive } from '@nuxtjs/composition-api'
+export default defineComponent({
+  setup() {
+    // data() {
+    //   return {
+    //     items: [
+    //       {
+    //         title: 'Home',
+    //         icon: 'home',
+    //         to: { name: 'index' },
+    //       },
+    //       {
+    //         title: 'Inspire',
+    //         icon: 'lightbulb',
+    //         to: { name: 'inspire' },
+    //       },
+    //     ],
+    //   }
+    // },
+    const items = reactive([
+      {
+        title: 'Home',
+        icon: 'home',
+        to: { name: 'index' },
+      },
+      {
+        title: 'Inspire',
+        icon: 'lightbulb',
+        to: { name: 'inspire' },
+      },
+    ])
+
+    return { items }
   },
-}
+})
 </script>
