@@ -1,0 +1,20 @@
+.ntf-area-container {
+  margin-bottom: 1.5rem;
+  &.ntf-single {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.ntf-block-container:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.ntf-button-field {
+  margin-top: 2rem;
+}
+
+input[type="text"], input[type="email"], input[type="number"], textarea {
+  text-rendering: auto !important;
+}
