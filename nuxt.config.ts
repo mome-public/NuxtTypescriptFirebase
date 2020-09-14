@@ -1,4 +1,7 @@
-export default {
+import { NuxtConfig } from '@nuxt/types'
+import format from 'date-fns/format'
+
+const config: NuxtConfig = {
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -7,7 +10,7 @@ export default {
   /*
    ** Change srcDir
    */
-  srcDir: 'src',
+  srcDir: 'src/',
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -57,6 +60,24 @@ export default {
       'nuxt-buefy',
       {
         css: false,
+        defaultIconPack: 'fas',
+        defaultDateFormatter: (date: Date) => format(date, 'YYYY年M月D日'),
+        defaultDayNames: ['日', '月', '火', '水', '木', '金', '土'],
+        defaultMonthNames: [
+          '1月',
+          '2月',
+          '3月',
+          '4月',
+          '5月',
+          '6月',
+          '7月',
+          '8月',
+          '9月',
+          '10月',
+          '11月',
+          '12月',
+        ],
+        defaultUseHtml5Validation: false,
       },
     ],
     // Doc: https://axios.nuxtjs.org/usage
@@ -74,3 +95,5 @@ export default {
    */
   build: {},
 }
+
+export default config
