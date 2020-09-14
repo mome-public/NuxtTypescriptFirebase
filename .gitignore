@@ -92,3 +92,4 @@ sw.*
 # firebase
 *firebase-adminsdk*.json
 .runtimeconfig.json
+*.tsbuildinfo
