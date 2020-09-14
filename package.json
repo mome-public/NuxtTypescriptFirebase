@@ -29,10 +29,13 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^1.0.0",
     "@nuxtjs/axios": "^5.12.0",
+    "@nuxtjs/composition-api": "^0.12.3",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "date-fns": "^2.16.1",
     "firebase": "^7.20.0",
     "nuxt": "^2.14.0",
-    "nuxt-buefy": "^0.3.31"
+    "nuxt-buefy": "^0.3.31",
+    "vee-validate": "^3.3.11"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.0",
@@ -48,7 +51,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
+    "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
+    "sass-loader": "^10.0.2",
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0"

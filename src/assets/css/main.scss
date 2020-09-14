@@ -1,0 +1,71 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Set brand colors
+$mizuasagi: #5DC2D0;
+$tuyukusa: #398FBC;
+$konnezu: #467C8D;
+$kogane: #EDBF02;
+$karakurenai: #E23457;
+$asagi: #0094B2;
+$entan: #F07159;
+
+// Set variables
+/* stylelint-disable */
+$primary: $asagi;
+$primary-invert: $white;
+$info: $konnezu;
+$info-invert: findColorInvert($info);
+$warning: $kogane;
+$warning-invert: findColorInvert($warning);
+$danger: $karakurenai;
+$danger-invert: findColorInvert($danger);
+$primary-alt: $mizuasagi;
+$primary-alt-invert: findColorInvert($primary-alt);
+$accent: $entan;
+$accent-invert: findColorInvert($accent);
+$twitter: #1DA1F2;
+$twitter-invert: findColorInvert($twitter);
+$facebook: #1877F2;
+$facebook-invert: findColorInvert($facebook);
+$line: #00B900;
+$line-invert: findColorInvert($line);
+/* stylelint-enable */
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+  "white": ($white, $black),
+  "black": ($black, $white),
+  "light": ($light, $light-invert),
+  "dark": ($dark, $dark-invert),
+  "primary": ($primary, $primary-invert),
+  "info": ($info, $info-invert),
+  "success": ($success, $success-invert),
+  "warning": ($warning, $warning-invert),
+  "danger": ($danger, $danger-invert),
+  "primary-alt": ($primary-alt, $primary-alt-invert),
+  "accent": ($accent, $accent-invert),
+  "pale": (rgba($primary, 0.1), $white),
+  "twitter": ($twitter, $twitter-invert),
+  "facebook": ($facebook, $facebook-invert),
+  "line": ($line, $line-invert)
+);
+
+// Links
+$link: $tuyukusa;
+$link-invert: $link-invert;
+$link-focus-border: $link;
+
+// Update some of Bulma's component variables
+$footer-padding: 0;
+$card-shadow: 0 0 0 rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
+$box-shadow: 0 0 0 rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
+$section-padding: 1.5rem;
+$body-line-height: 1.7;
+$title-line-height: 1.5;
+$fullhd-enabled: false;
+$menu-item-hover-background-color: rgba($primary-alt, 0.1);
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

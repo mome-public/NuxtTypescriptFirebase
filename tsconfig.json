@@ -14,20 +14,30 @@
     "strict": true,
     "noEmit": true,
     "experimentalDecorators": true,
-    "baseUrl": "src",
     "incremental": true,
+    "baseUrl": ".",
     "paths": {
       "~/*": [
         "./src/*"
       ],
       "@/*": [
         "./src/*"
+      ],
+      "~~/*": [
+        "./*"
+      ],
+      "@@/*": [
+        "./*"
       ]
     },
     "types": [
       "@types/node",
       "@nuxt/types"
-    ]
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "./src/types"
+    ],
   },
   "exclude": [
     "node_modules",

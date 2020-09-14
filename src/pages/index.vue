@@ -22,13 +22,14 @@
 </template>
 
 <script>
+import { defineComponent } from '@nuxtjs/composition-api'
 import Card from '~/components/Card'
 
-export default {
+export default defineComponent({
   name: 'HomePage',
 
   components: {
     Card,
   },
-}
+})
 </script>
