@@ -21,9 +21,9 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import Card from '~/components/Card'
+import Card from '~/components/Card.vue'
 
 export default defineComponent({
   name: 'HomePage',

@@ -36,7 +36,8 @@ const config: NuxtConfig = {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ['~/plugins/axios-accessor'],
+  // plugins: [],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components

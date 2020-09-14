@@ -15,20 +15,14 @@
     "noEmit": true,
     "experimentalDecorators": true,
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
       "~/*": [
-        "./src/*"
+        "./*"
       ],
       "@/*": [
-        "./src/*"
-      ],
-      "~~/*": [
         "./*"
       ],
-      "@@/*": [
-        "./*"
-      ]
     },
     "types": [
       "@types/node",
@@ -36,7 +30,7 @@
     ],
     "typeRoots": [
       "node_modules/@types",
-      "./src/types"
+      "src/types"
     ],
   },
   "exclude": [

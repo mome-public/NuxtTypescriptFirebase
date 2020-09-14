@@ -12,3 +12,5 @@ node_modules/
 
 # Firebase environment variables file
 .runtimeconfig.json
+
+*.tsbuildinfo
