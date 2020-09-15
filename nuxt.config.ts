@@ -1,6 +1,11 @@
 import { NuxtConfig } from '@nuxt/types'
 import format from 'date-fns/format'
 
+// Using .env file in nuxt.config.js
+// See https://github.com/nuxt-community/dotenv-module#using-env-file-in-nuxtconfigjs
+const filename = `src/config/.env.${process.env.NODE_ENV}`
+require('dotenv').config({ path: filename })
+
 const config: NuxtConfig = {
   /*
    ** Nuxt target
@@ -51,6 +56,8 @@ const config: NuxtConfig = {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     '@nuxtjs/composition-api',
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    ['@nuxtjs/dotenv', { path: filename }],
   ],
   /*
    ** Nuxt.js modules
