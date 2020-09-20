@@ -3,8 +3,12 @@ import format from 'date-fns/format'
 
 // Using .env file in nuxt.config.js
 // See https://github.com/nuxt-community/dotenv-module#using-env-file-in-nuxtconfigjs
-const filename = `src/config/.env.${process.env.NODE_ENV}`
-require('dotenv').config({ path: filename })
+const dotenvPath = 'src/config/'
+const dotenvFileName = `.env.${process.env.NODE_ENV}`
+require('dotenv').config({
+  path: dotenvPath,
+  filename: dotenvFileName,
+})
 
 const config: NuxtConfig = {
   /*
@@ -57,7 +61,13 @@ const config: NuxtConfig = {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/composition-api',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    ['@nuxtjs/dotenv', { path: filename }],
+    [
+      '@nuxtjs/dotenv',
+      {
+        path: dotenvPath,
+        filename: dotenvFileName,
+      },
+    ],
   ],
   /*
    ** Nuxt.js modules
