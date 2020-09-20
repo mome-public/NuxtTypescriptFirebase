@@ -26,11 +26,11 @@
     },
     "types": [
       "@types/node",
-      "@nuxt/types"
+      "@nuxt/types",
     ],
     "typeRoots": [
       "node_modules/@types",
-      "src/types"
+      "./types"
     ],
   },
   "exclude": [
