@@ -45,8 +45,8 @@ const config: NuxtConfig = {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/axios-accessor'],
   // plugins: [],
+  plugins: ['~plugins/vee-validate'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -111,7 +111,10 @@ const config: NuxtConfig = {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    // https://baianat.github.io/vee-validate/examples/nuxt.html
+    transpile: ['vee-validate/dist/rules'],
+  },
 }
 
 export default config
