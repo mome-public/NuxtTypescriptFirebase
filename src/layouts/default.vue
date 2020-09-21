@@ -38,25 +38,17 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, provide } from '@nuxtjs/composition-api'
+import AuthKey from '~/store/auth/key'
+import useAuth from '~/store/auth'
+import TransitionSourceKey from '~/store/transitionSource/key'
+import useTransitionSource from '~/store/transitionSource'
+
 export default defineComponent({
   setup() {
-    // data() {
-    //   return {
-    //     items: [
-    //       {
-    //         title: 'Home',
-    //         icon: 'home',
-    //         to: { name: 'index' },
-    //       },
-    //       {
-    //         title: 'Inspire',
-    //         icon: 'lightbulb',
-    //         to: { name: 'inspire' },
-    //       },
-    //     ],
-    //   }
-    // },
+    provide(AuthKey, useAuth())
+    provide(TransitionSourceKey, useTransitionSource())
+
     const items = reactive([
       {
         title: 'Home',
