@@ -1,19 +1,13 @@
 import axios from 'axios'
-import { reactive } from '@nuxtjs/composition-api'
 import firebase from '~/plugins/firebase'
 
 export default function useAuth() {
-  // state
-  const state = reactive<{
-    uid: string
-  }>({
-    uid: '',
-  })
-
   // logics
-  const isAuthenticated = () => state.uid
-  const saveUID = (uid: string) => {
-    state.uid = uid
+  const getUID = () => {
+    return firebase.auth().currentUser
+  }
+  const isAuthenticated = () => {
+    return !!firebase.auth().currentUser
   }
   const login = async (uid: string) => {
     const currentUser = firebase.auth().currentUser
@@ -23,18 +17,14 @@ export default function useAuth() {
     await axios.post('/api/login', {
       uid,
     })
-
-    state.uid = uid
   }
   const logout = async () => {
     await firebase.auth().signOut()
     await axios.post('/api/logout')
-    state.uid = ''
   }
 
   return {
-    state,
-    saveUID,
+    getUID,
     isAuthenticated,
     login,
     logout,

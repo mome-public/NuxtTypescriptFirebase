@@ -41,10 +41,13 @@
 import { defineComponent, reactive, provide } from '@nuxtjs/composition-api'
 import AuthKey from '~/store/auth/key'
 import useAuth from '~/store/auth'
+import TransitionSourceKey from '~/store/transitionSource/key'
+import useTransitionSource from '~/store/transitionSource'
 
 export default defineComponent({
   setup() {
     provide(AuthKey, useAuth())
+    provide(TransitionSourceKey, useTransitionSource())
 
     const items = reactive([
       {
