@@ -36,7 +36,8 @@
     "firebase": "^7.20.0",
     "nuxt": "^2.14.0",
     "nuxt-buefy": "^0.3.31",
-    "vee-validate": "^3.3.11"
+    "vee-validate": "^4.0.0-alpha.14",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.5",

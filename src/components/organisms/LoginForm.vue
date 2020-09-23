@@ -1,72 +1,70 @@
 <template>
-  <div class="container crs-block-container">
-    <notification-error :active="state.isErrorMessageActive">
-      {{ state.errorMessage }}
+  <div class="container ntf-block-container">
+    <notification-error :active="isErrorMessageActive">
+      {{ errorMessage }}
     </notification-error>
-    <validation-observer ref="observer" slim>
-      <form @submit.prevent="doLogin">
-        <validation-provider
-          v-slot="{ errors }"
-          rules="required|email|max:256"
-          name="メールアドレス"
-          slim
+    <Form
+      v-slot="{ errors }"
+      :validation-schema="schema"
+      @submit.prevent="doLogin"
+    >
+      <Field v-slot="{ field }" name="email">
+        <b-field
+          :type="{ 'is-danger': !!errors.email }"
+          :message="errors.email"
         >
-          <b-field :type="{ 'is-danger': !!errors[0] }" :message="errors[0]">
-            <template slot="label"> メールアドレス </template>
-            <b-input
-              v-model="state.email"
-              type="email"
-              :has-counter="false"
-              placeholder="example@mome.fan"
-              maxlength="256"
-              icon="envelope"
-              :disabled="state.processing"
-            />
-          </b-field>
-        </validation-provider>
-        <validation-provider
-          v-slot="{ errors }"
-          rules="required"
-          name="パスワード"
-          slim
-        >
-          <b-field :type="{ 'is-danger': !!errors[0] }" :message="errors[0]">
-            <template slot="label"> パスワード </template>
-            <b-input
-              ref="password"
-              v-model="state.password"
-              type="password"
-              placeholder="パスワード"
-              icon="key"
-              password-reveal
-              :disabled="state.processing"
-            />
-          </b-field>
-        </validation-provider>
-        <b-field class="crs-button-field">
-          <base-button
-            native-type="submit"
-            size="is-medium"
-            :disabled="state.processing"
-          >
-            ログイン
-          </base-button>
+          <template slot="label"> メールアドレス </template>
+          <b-input
+            v-bind="field"
+            type="email"
+            :has-counter="false"
+            placeholder="example@mome.fan"
+            maxlength="256"
+            icon="envelope"
+            :disabled="processing"
+          />
         </b-field>
-      </form>
-    </validation-observer>
+      </Field>
+      <Field v-slot="{ field }" name="password">
+        <b-field
+          :type="{ 'is-danger': !!errors.password }"
+          :message="errors.password"
+        >
+          <template slot="label"> パスワード </template>
+          <b-input
+            ref="password"
+            v-bind="field"
+            type="password"
+            placeholder="パスワード"
+            icon="key"
+            password-reveal
+            :disabled="processing"
+          />
+        </b-field>
+      </Field>
+      <b-field class="ntf-button-field">
+        <base-button
+          native-type="submit"
+          size="is-medium"
+          :disabled="processing"
+        >
+          ログイン
+        </base-button>
+      </b-field>
+    </Form>
   </div>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
-  reactive,
   inject,
   useContext,
   ref,
   onMounted,
 } from '@nuxtjs/composition-api'
-import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import { Field, Form } from 'vee-validate'
+import * as yup from 'yup'
 import firebase from '~/plugins/firebase'
 import BaseButton from '~/components/atoms/BaseButton.vue'
 import RequireLabel from '~/components/atoms/RequireLabel.vue'
@@ -89,26 +87,24 @@ const className = 'LoginForm'
 export default defineComponent({
   name: 'LoginForm',
   components: {
-    ValidationObserver,
-    ValidationProvider,
+    Field,
+    Form,
     BaseButton,
     RequireLabel,
     NotificationError,
   },
   setup() {
     // State
-    const state = reactive<{
-      email: string
-      password: string
-      isErrorMessageActive: boolean
-      errorMessage: string
-      processing: boolean
-    }>({
-      email: '',
-      password: '',
-      isErrorMessageActive: false,
-      errorMessage: '',
-      processing: false,
+    const email = ref<string>('')
+    const password = ref<string>('')
+    const isErrorMessageActive = ref<boolean>(false)
+    const errorMessage = ref<string>('')
+    const processing = ref<boolean>(false)
+
+    const schema = yup.object().shape({
+      email: yup.string().required().email(),
+      name: yup.string().required(),
+      password: yup.string().required().min(8),
     })
 
     // Stores
@@ -119,22 +115,22 @@ export default defineComponent({
 
     // Context
     const { redirect, error } = useContext()
-    const observer = ref<InstanceType<typeof ValidationObserver>>()
+    const observer = ref<InstanceType<typeof Form>>()
 
     // Logics
     const mounted = onMounted(() => {
-      if (!observer.value) return
-      console.log(observer.value)
+      console.log(observer)
     })
+
     const doLogin = async () => {
       const funcName = 'doLogin'
 
-      state.processing = true
+      processing.value = true
       const isValid = await observer.value!.validate()
       if (isValid) {
         const authUser = await firebase
           .auth()
-          .signInWithEmailAndPassword(state.email, state.password)
+          .signInWithEmailAndPassword(email.value, password.value)
           .catch((error) => {
             if (error.code !== undefined) {
               switch (error.code) {
@@ -143,15 +139,15 @@ export default defineComponent({
                 case 'auth/user-disabled':
                 case 'auth/invalid-email':
                 case 'auth/network-request-failed':
-                  state.errorMessage = 'ログインに失敗しました。'
+                  errorMessage.value = 'ログインに失敗しました。'
                   break
                 default:
-                  state.errorMessage = ''
+                  errorMessage.value = ''
               }
 
-              if (state.errorMessage) {
-                state.isErrorMessageActive = true
-                state.processing = false
+              if (errorMessage.value) {
+                isErrorMessageActive.value = true
+                processing.value = false
                 return true
               }
             }
@@ -248,12 +244,17 @@ export default defineComponent({
             console.log(message)
           })
       } else {
-        state.processing = false
+        processing.value = false
       }
     }
 
     return {
-      state,
+      email,
+      password,
+      isErrorMessageActive,
+      errorMessage,
+      processing,
+      schema,
       mounted,
       doLogin,
     }
