@@ -1,18 +1,16 @@
 import { firestore } from 'firebase/app'
 
-export type User = {
+export interface UserPrivacy {
   id?: string
-  name: string
-  status: number
-  isRequiredInfoFilled: boolean
+  gender: number | null
+  websiteUrl: string
   createdAt?: firestore.Timestamp | firestore.FieldValue | null
   updatedAt: firestore.Timestamp | firestore.FieldValue | null
 }
 
-export const blankUser: User = {
-  name: '',
-  status: 0,
-  isRequiredInfoFilled: false,
+export const blankUserPrivacy: UserPrivacy = {
+  gender: 0,
+  websiteUrl: '',
   createdAt: null,
   updatedAt: null,
 }
